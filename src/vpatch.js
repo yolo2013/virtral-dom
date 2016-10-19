@@ -19,6 +19,9 @@ export default class VPatch {
 
 export const PATCH_TYPES = {
   REPLACE: 0,
-  PROPS: 1,
-  TEXT: 2
+  INSERT: 1,
+  ORDER: 2,
+  REMOVE: 3,
+  PROPS: 4,
+  TEXT: 5
 }
