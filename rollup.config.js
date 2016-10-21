@@ -21,7 +21,7 @@ rollup.rollup({
       lodash: '_'
     },
     moduleName: 'VirtualDom',
-    dest: 'examples/bundle.js'
+    dest: 'dist/virtual-dom.js'
   })
   console.log('success')
 })

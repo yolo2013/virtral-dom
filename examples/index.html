@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .color-red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.js"></script>
+<script src="../dist/virtual-dom.js"></script>
+
+<script>
+  var VNode = VirtualDom.VNode
+  var diff = VirtualDom.diff
+  var createElement = VirtualDom.createElement
+  var patch = VirtualDom.patch
+
+  function vnodeMaker(text, color, children) {
+    return new VNode('div', {
+      style: {
+        color: color
+      },
+      textContent: 'for now'
+    }, children)
+  }
+
+  let node1 = new VNode('input', {
+    className: 'node1',
+    type: 'text',
+    value: '是谁在敲打我窗'
+  }, [], 'text1')
+
+  let node2 = new VNode('div', {
+    className: 'node1',
+    textContent: '一个短篇'
+  }, [], 'node2')
+
+  const oldNode = vnodeMaker('旧文', '#000', [node1, node2])
+
+  let rootNode = createElement(oldNode)
+
+
+  document.body.appendChild(rootNode)
+
+  setTimeout(function () {
+
+    const newNode = vnodeMaker('新文', 'red', [node2])
+    const patches = diff(oldNode, newNode)
+
+    patch(rootNode, patches);
+
+  }, 3000)
+
+
+</script>
+</body>
+</html>
