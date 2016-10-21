@@ -15,7 +15,6 @@ rollup.rollup({
   ],
   plugins: [cjs(), buble()],
 }).then( function ( bundle ) {
-  console.log(1)
   bundle.write({
     format: 'umd',
     globals: {
@@ -24,4 +23,5 @@ rollup.rollup({
     moduleName: 'VirtualDom',
     dest: 'examples/bundle.js'
   })
+  console.log('success')
 })

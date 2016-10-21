@@ -6,6 +6,7 @@ import _ from 'lodash'
 import applyProps from './apply-props'
 
 export default function createElement(vnode) {
+
   const doc = document
 
   let node = vnode.ele = vnode.namespace

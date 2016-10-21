@@ -11,7 +11,7 @@ export default function applyPatch(node, vpatch) {
 
   switch (vpatch.type) {
     case PATCH_TYPES.INSERT:
-      return insertNode(node, vnode)
+      return insertNode(node, patch)
     case PATCH_TYPES.REMOVE:
       return removeNode(node)
     case PATCH_TYPES.REPLACE:

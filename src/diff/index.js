@@ -73,7 +73,7 @@ function diffChildren(oldVNode, newVNode, patch, apply, index) {
     }
 
     // 在上面的递归之后，节点的所有子节点都处理完成，index需要递增
-    if (leftNode.count) {
+    if (leftNode && leftNode.count) {
       index += leftNode.count
     }
   }
@@ -92,7 +92,7 @@ function diffChildren(oldVNode, newVNode, patch, apply, index) {
 
 function appendPatch(apply, patch) {
   if (apply) {
-    if (isArray(apply)) {
+    if (_.isArray(apply)) {
       apply.push(patch)
     } else {
       apply = [apply, patch]
