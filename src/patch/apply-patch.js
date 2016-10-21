@@ -13,7 +13,7 @@ export default function applyPatch(node, vpatch) {
     case PATCH_TYPES.INSERT:
       return insertNode(node, patch)
     case PATCH_TYPES.REMOVE:
-      return removeNode(node)
+      return removeNode(vnode.ele)
     case PATCH_TYPES.REPLACE:
     case PATCH_TYPES.ORDER:
     case PATCH_TYPES.PROPS:
