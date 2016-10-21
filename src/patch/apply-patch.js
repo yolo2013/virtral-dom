@@ -17,7 +17,8 @@ export default function applyPatch(node, vpatch) {
     case PATCH_TYPES.REPLACE:
     case PATCH_TYPES.ORDER:
     case PATCH_TYPES.PROPS:
-      return applyProps(node, patch)
+      applyProps(node, patch)
+      return node
     case PATCH_TYPES.TEXT:
     default:
       return node

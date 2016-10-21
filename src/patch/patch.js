@@ -4,6 +4,7 @@
 
 import _ from 'lodash'
 import applyPatch from './apply-patch'
+import domIndex from './dom-index'
 
 export default function patch(node, patches) {
   let indices = patchIndices(patches)
@@ -12,32 +13,31 @@ export default function patch(node, patches) {
     return node
   }
 
-  let walker = {index: 0}
+  let index = domIndex(node, patches.oldNode, indices)
 
-  walk(node, walker, patches)
+  _.each(indices, indice => {
+    node = patchOperation(node, index[indice], patches[indice])
+  })
+
+  return node
 }
 
-function walk(node, walker, patches) {
-  let currentPatches = patches[walker.index]
-
-  let len = node.childNodes ? node.childNodes.length : 0
-
-  for (let i = 0; i < len; i++) {
-    let child = node.childNodes[i]
-    walker.index++
-    walk(child, walker, patches)
-  }
-
-  if (currentPatches) {
-    if(!_.isArray(currentPatches)) {
-      currentPatches = [currentPatches]
+function patchOperation(node, domNode, patches) {
+  if (patches) {
+    if(!_.isArray(patches)) {
+      patches = [patches]
     }
 
-    _.each(currentPatches, patch => {
-      applyPatch(node, patch)
-    })
+    _.each(patches, patch => {
+      let newNode = applyPatch(node, patch)
 
+      if (domNode === node) {
+        node = newNode
+      }
+    })
   }
+
+  return node
 }
 
 function patchIndices(patches) {
@@ -45,7 +45,7 @@ function patchIndices(patches) {
   _.forIn(patches, (patch, key) => {
 
     if (key !== 'oldNode') {
-      indices.push(patch)
+      indices.push(Number(key))
     }
   })
 

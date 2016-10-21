@@ -24,6 +24,7 @@ function walk(oldVNode, newVNode, patch, index) {
 
 
   if(!newVNode) {
+    // 节点被移除，不用单独加操作，在进行diff的时候会将这部分加进去
     apply = appendPatch(apply, new VPatch(PATCH_TYPES.REMOVE, oldVNode, newVNode))
   } else  if (oldVNode.tagName === newVNode.tagName
     && oldVNode.namespace === newVNode.namespace

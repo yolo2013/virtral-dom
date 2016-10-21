@@ -42,7 +42,6 @@ export default function recorder(oldChildren, newChildren) {
   // 无key的节点数量
   let freeCount = newFree.length
 
-
   // 首先遍历旧节点
   _.each(oldChildren, (oldChild, index) => {
     let itemIndex
@@ -205,9 +204,7 @@ export default function recorder(oldChildren, newChildren) {
       inserts: inserts
     }
   }
-
 }
-
 
 // 获取一个子节点集合中，固定了key的索引和不固定的索引
 function keyIndex(children) {
