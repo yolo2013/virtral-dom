@@ -704,7 +704,8 @@ var index = {
   VNode: VNode,
   diff: diff,
   createElement: createElement,
-  patch: patch
+  patch: patch,
+  recorder: recorder
 };
 
 return index;

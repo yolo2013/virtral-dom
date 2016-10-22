@@ -4,10 +4,10 @@
 
 import diff from '../src/diff/index'
 import VNode from '../src/vnode'
+import { expect } from 'chai'
+fixture `Getting Start`
 
-export default function test () {
-
-
+test('diff', async t => {
   let node3 = new VNode('div', {
     className: 'node3'
   }, [], 'node3')
@@ -34,6 +34,15 @@ export default function test () {
   }, [freeNode2], 'node1')
 
   const result = diff(node1, node2)
-}
 
-test()
+  expect(result.oldNode).to.equal(node1)
+})
+
+
+// export default function test () {
+//
+//
+//
+// }
+//
+// test()

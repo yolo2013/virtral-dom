@@ -3,7 +3,7 @@
  */
 import _ from 'lodash'
 import VPatch, {PATCH_TYPES} from '../vpatch'
-import recorder from './recorder'
+import reorder from './reorder'
 import diffProps from './diff-props'
 
 export default function diff(oldNode, newNode) {
@@ -55,7 +55,7 @@ function walk(oldVNode, newVNode, patch, index) {
 function diffChildren(oldVNode, newVNode, patch, apply, index) {
   let oldChildren = oldVNode.children
 
-  let orderedSet = recorder(oldChildren, newVNode.children)
+  let orderedSet = reorder(oldChildren, newVNode.children)
   let newChildren = orderedSet.children
 
   let len = Math.max(oldChildren.length, newChildren.length)

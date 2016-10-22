@@ -16,6 +16,7 @@ export default function applyPatch(node, vpatch) {
       return removeNode(vnode.ele)
     case PATCH_TYPES.REPLACE:
     case PATCH_TYPES.ORDER:
+      reorderChildren(node, patch)
     case PATCH_TYPES.PROPS:
       applyProps(node, patch)
       return node
@@ -43,4 +44,29 @@ function removeNode(node) {
   }
 
   return null
+}
+
+// 子节点重新排序
+function reorderChildren(node, moves) {
+  let childNodes = node.childNodes
+
+  let keyMap = {}
+  let tempNode
+
+  _.each(moves.removes, remove => {
+    tempNode = childNodes[remove.from]
+    if(remove.key) {
+      keyMap[remove.key] = tempNode
+    }
+    node.removeChild(tempNode)
+  })
+
+  let length = childNodes.length
+  _.each(moves.inserts, insert => {
+    tempNode = keyMap[insert.key]
+
+    // 如果当前to大于子节点长度，正常现象，因为未必所以其他节点都已经添加进去了，
+    // 则把该节点加至最后
+    node.insertBefore(tempNode, insert.to >= length++ ? null : childNodes[insert.to])
+  })
 }

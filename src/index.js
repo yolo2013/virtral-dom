@@ -3,6 +3,7 @@
  */
 import VNode from './vnode'
 import diff from './diff'
+import reorder from './diff/reorder'
 import createElement from './patch/create-element'
 import patch from './patch/patch'
 
@@ -10,5 +11,6 @@ export default {
   VNode,
   diff,
   createElement,
-  patch
+  patch,
+  reorder
 }

@@ -20,42 +20,77 @@
   var createElement = VirtualDom.createElement
   var patch = VirtualDom.patch
 
-  function vnodeMaker(text, color, children) {
-    return new VNode('div', {
-      style: {
-        color: color
-      },
-      textContent: 'for now'
-    }, children)
-  }
+//  function vnodeMaker(text, color, children) {
+//    return new VNode('div', {
+//      style: {
+//        color: color
+//      },
+//      textContent: 'for now'
+//    }, children)
+//  }
+//
+//  let node1 = new VNode('input', {
+//    className: 'node1',
+//    type: 'text',
+//    value: '是谁在敲打我窗'
+//  }, [], 'text1')
+//
+//  let node2 = new VNode('div', {
+//    className: 'node1',
+//    textContent: '一个短篇'
+//  }, [], 'node2')
+//
+//  const oldNode = vnodeMaker('旧文', '#000', [node1, node2])
+//
+//  let rootNode = createElement(oldNode)
+//
+//
+//  document.body.appendChild(rootNode)
+//
+//  setTimeout(function () {
+//
+//    const newNode = vnodeMaker('新文', 'red', [node2])
+//    const patches = diff(oldNode, newNode)
+//
+//    patch(rootNode, patches);
+//
+//  }, 3000)
 
-  let node1 = new VNode('input', {
-    className: 'node1',
-    type: 'text',
-    value: '是谁在敲打我窗'
-  }, [], 'text1')
+
+  let node1 = new VNode('div', {
+    className: 'node1'
+  }, [], 'node1')
 
   let node2 = new VNode('div', {
-    className: 'node1',
-    textContent: '一个短篇'
+    className: 'node2'
   }, [], 'node2')
 
-  const oldNode = vnodeMaker('旧文', '#000', [node1, node2])
+  let node3 = new VNode('div', {
+    className: 'node3'
+  }, [], 'node3')
 
-  let rootNode = createElement(oldNode)
+  let node4 = new VNode('div', {
+    className: 'node4'
+  }, [], 'node4')
 
+  let node5 = new VNode('div', {
+    className: 'node5'
+  }, [], 'node5')
 
-  document.body.appendChild(rootNode)
+  let freeNode1 = new VNode('div')
+  let freeNode2 = new VNode('div', {
+    className: 'new-no-key'
+  })
 
-  setTimeout(function () {
+  let freeNode3 = new VNode('div', {
+    className: 'new-no-key-2'
+  })
+  let oldChildren = [node1, node2, node3, freeNode1, node4, node5]
 
-    const newNode = vnodeMaker('新文', 'red', [node2])
-    const patches = diff(oldNode, newNode)
+  let newChildren = [node5, freeNode2, node2, freeNode3]
 
-    patch(rootNode, patches);
-
-  }, 3000)
-
+  debugger
+  let result = VirtualDom.recorder(oldChildren, newChildren)
 
 </script>
 </body>
