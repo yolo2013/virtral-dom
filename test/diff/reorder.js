@@ -75,4 +75,59 @@ test('reorder', async t => {
     from: 1,
     key: 'node5'
   })
+
+  let diffRevert = reorder(newChildren, oldChildren)
+
+
+  //   1, 2, 3, f1, 4, 5
+  // + 5, f2, 2
+  // =>5, f2, 2, 1, 3, 4
+  expect(diffRevert.children.length).to.equal(6)
+  expect(diffRevert.children).to.deep.equal([node5, freeNode1, node2, node1, node3, node4])
+  expect(diffRevert.moves.inserts.length).to.equal(5)
+
+  expect(diffRevert.moves.inserts[0]).to.deep.equal({
+    key: 'node1',
+    to: 0
+  })
+  expect(diffRevert.moves.inserts[1]).to.deep.equal({
+    key: 'node2',
+    to: 1
+  })
+  expect(diffRevert.moves.inserts[2]).to.deep.equal({
+    key: 'node3',
+    to: 2
+  })
+  expect(diffRevert.moves.inserts[3]).to.deep.equal({
+    key: 'node4',
+    to: 4
+  })
+  expect(diffRevert.moves.inserts[4]).to.deep.equal({
+    key: 'node5',
+    to: 5
+  })
+
+
+  expect(diffRevert.moves.removes.length).to.equal(5)
+  expect(diffRevert.moves.removes[0]).to.deep.equal({
+    from: 0,
+    key: 'node5'
+  })
+  expect(diffRevert.moves.removes[1]).to.deep.equal({
+    from: 1,
+    key: 'node2'
+  })
+  expect(diffRevert.moves.removes[2]).to.deep.equal({
+    from: 1,
+    key: 'node1'
+  })
+  expect(diffRevert.moves.removes[3]).to.deep.equal({
+    from: 1,
+    key: 'node3'
+  })
+  expect(diffRevert.moves.removes[4]).to.deep.equal({
+    from: 1,
+    key: 'node4'
+  })
+
 })

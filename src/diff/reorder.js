@@ -151,8 +151,6 @@ export default function reorder(oldChildren, newChildren) {
           // 如果新增的节点
           if (newKeys[simulateItem.key] !== i + 1) {
 
-            // 这里第三个字段key，并不是标志被删除的节点的key
-            // 而是后面要在此位置替换的节点的key
             removes.push(remove(simulate, simulateIndex, simulateItem.key))
             simulateItem = simulate[simulateIndex]
 
