@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import has from 'lodash/has'
+import isObject from 'lodash/isObject'
+import forIn from 'lodash/forIn'
 
 // 两个属性差异比较
 export default function diffProps(oldProps, newProps) {
@@ -8,7 +10,7 @@ export default function diffProps(oldProps, newProps) {
   for (let key in oldProps) {
     if (oldProps.hasOwnProperty(key)) {
       // 如果新属性中没有该属性，则直接置为undefined
-      if (!_.has(newProps, key)) {
+      if (!has(newProps, key)) {
         diff[key] = void 0
       }
 
@@ -18,7 +20,7 @@ export default function diffProps(oldProps, newProps) {
       if (newValue === oldValue) {
         // 完全相等
         continue
-      } else if (_.isObject(newValue) && _.isObject(oldValue)) {
+      } else if (isObject(newValue) && isObject(oldValue)) {
         // 两个值都是对象
 
         // 原型不同
@@ -38,9 +40,9 @@ export default function diffProps(oldProps, newProps) {
     }
   }
 
-  _.forIn(newProps, (newValue, key) => {
+  forIn(newProps, (newValue, key) => {
     // 如果旧属性中没有该属性，则进行添加
-    if (!_.has(oldProps, key)) {
+    if (!has(oldProps, key)) {
       diff[key] = newValue
     }
   })

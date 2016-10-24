@@ -1,7 +1,4 @@
-/**
- * Created by xuhua on 2016/10/21.
- */
-import _ from 'lodash'
+import each from 'lodash/each'
 // 整个文件就是为了给Dom做一个排序，和patches对应上，没这个真的必要吗？
 
 export default function domIndex(node, tree, indices) {
@@ -28,7 +25,7 @@ function recurse(node, tree, indices, index, nodes) {
     if(vChildren) {
       const childNodes = node.childNodes
 
-      _.each(vChildren, (vChild, i) => {
+      each(vChildren, (vChild, i) => {
         index++
 
         vChild = vChild || {}

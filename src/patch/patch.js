@@ -1,8 +1,6 @@
-/**
- * Created by xuhua on 2016/10/20.
- */
-
-import _ from 'lodash'
+import each from 'lodash/each'
+import forIn from 'lodash/forIn'
+import isArray from 'lodash/isArray'
 import applyPatch from './apply-patch'
 import domIndex from './dom-index'
 
@@ -15,7 +13,7 @@ export default function patch(node, patches) {
 
   let index = domIndex(node, patches.oldNode, indices)
 
-  _.each(indices, indice => {
+  each(indices, indice => {
     node = patchOperation(node, index[indice], patches[indice])
   })
 
@@ -24,11 +22,11 @@ export default function patch(node, patches) {
 
 function patchOperation(node, domNode, patches) {
   if (patches) {
-    if(!_.isArray(patches)) {
+    if(!isArray(patches)) {
       patches = [patches]
     }
 
-    _.each(patches, patch => {
+    each(patches, patch => {
       let newNode = applyPatch(node, patch)
 
       if (domNode === node) {
@@ -42,7 +40,7 @@ function patchOperation(node, domNode, patches) {
 
 function patchIndices(patches) {
   let indices = []
-  _.forIn(patches, (patch, key) => {
+  forIn(patches, (patch, key) => {
 
     if (key !== 'oldNode') {
       indices.push(Number(key))

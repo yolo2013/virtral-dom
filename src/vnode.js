@@ -1,11 +1,5 @@
-/**
- * Created by xuhua on 2016/10/17.
- */
-
-import _ from 'lodash'
-
-let defaultProps = {}
-const noChildren = []
+import isArray from 'lodash/isArray'
+import each from 'lodash/each'
 
 export default class VNode {
 
@@ -25,8 +19,8 @@ export default class VNode {
 
     let count = 0
 
-    if (_.isArray(this.children)) {
-      _.each(this.children, child => {
+    if (isArray(this.children)) {
+      each(this.children, child => {
 
         // 子节点是 VNode 对象
         if (child instanceof VNode) {

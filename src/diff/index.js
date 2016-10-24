@@ -1,7 +1,8 @@
 /**
  * Created by xuhua on 2016/10/17.
  */
-import _ from 'lodash'
+import isEmpty from 'lodash/isEmpty'
+import isArray from 'lodash/isArray'
 import VPatch, {PATCH_TYPES} from '../vpatch'
 import reorder from './reorder'
 import diffProps from './diff-props'
@@ -34,7 +35,7 @@ function walk(oldVNode, newVNode, patch, index) {
     let propsDiff = diffProps(oldVNode.props, newVNode.props)
 
     // 如果存在不同
-    if (propsDiff && !_.isEmpty(propsDiff)) {
+    if (propsDiff && !isEmpty(propsDiff)) {
       apply = appendPatch(apply, new VPatch(PATCH_TYPES.PROPS, oldVNode, propsDiff))
     }
 
@@ -93,7 +94,7 @@ function diffChildren(oldVNode, newVNode, patch, apply, index) {
 
 function appendPatch(apply, patch) {
   if (apply) {
-    if (_.isArray(apply)) {
+    if (isArray(apply)) {
       apply.push(patch)
     } else {
       apply = [apply, patch]

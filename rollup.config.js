@@ -3,17 +3,18 @@
  */
 'use strict'
 
+const nodeResolve =require('rollup-plugin-node-resolve')
 const rollup = require('rollup')
 const buble = require('rollup-plugin-buble')
 const cjs = require('rollup-plugin-commonjs')
-
+const uglify = require('rollup-plugin-uglify')
 
 rollup.rollup({
   entry: './src/index.js',
   external: [
     'lodash'
   ],
-  plugins: [cjs(), buble()],
+  plugins: [cjs(), nodeResolve({ jsnext: true, main: true }), buble(), uglify()],
 }).then( function ( bundle ) {
   bundle.write({
     format: 'umd',

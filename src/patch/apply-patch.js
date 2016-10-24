@@ -1,9 +1,7 @@
-/**
- * Created by xuhua on 2016/10/20.
- */
 import VPatch, {PATCH_TYPES} from '../vpatch'
 import createElement from './create-element'
 import applyProps from './apply-props'
+import each from 'lodash/each'
 
 export default function applyPatch(node, vpatch) {
   var patch = vpatch.patch
@@ -53,7 +51,7 @@ function reorderChildren(node, moves) {
   let keyMap = {}
   let tempNode
 
-  _.each(moves.removes, remove => {
+  each(moves.removes, remove => {
     tempNode = childNodes[remove.from]
     if(remove.key) {
       keyMap[remove.key] = tempNode
@@ -62,7 +60,7 @@ function reorderChildren(node, moves) {
   })
 
   let length = childNodes.length
-  _.each(moves.inserts, insert => {
+  each(moves.inserts, insert => {
     tempNode = keyMap[insert.key]
 
     // 如果当前to大于子节点长度，正常现象，因为未必所以其他节点都已经添加进去了，

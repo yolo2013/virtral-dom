@@ -1,10 +1,14 @@
+import isObject from 'lodash/isObject'
+import forIn from 'lodash/forIn'
+import isString from 'lodash/isString'
+
 // 处理属性
 export default function applyProps(node, props) {
-  if (!_.isObject(props)) {
+  if (!isObject(props)) {
     console.log('属性必须是一个合法对象')
     return
   }
-  _.forIn(props, (propValue, prop) => {
+  forIn(props, (propValue, prop) => {
     if (propValue === undefined) {
       removeProp(node, prop)
     } else {
@@ -16,10 +20,10 @@ export default function applyProps(node, props) {
 // 设置属性
 function setProp(node, key, value) {
 
-  if (_.isObject(value)) {
+  if (isObject(value)) {
     // attributes
     if (key === 'attributes') {
-      _.forIn(value, (attrValue, attrName) => {
+      forIn(value, (attrValue, attrName) => {
         if (attrValue === undefined) {
           node.removeAttribute(attrName)
         } else {
@@ -31,7 +35,7 @@ function setProp(node, key, value) {
 
     // 样式属性
     if (key === 'style') {
-      _.forIn(value, (styleValue, styleName) => {
+      forIn(value, (styleValue, styleName) => {
         node[key][styleName] = styleValue || ''
       })
     }
@@ -42,7 +46,7 @@ function setProp(node, key, value) {
 
 // 移除属性
 function removeProp(node, prop) {
-  if (!prop || _.isString(prop)) {
+  if (!prop || isString(prop)) {
     console.log('移除属性需要合法的属性名')
     return
   }

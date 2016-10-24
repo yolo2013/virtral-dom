@@ -1,7 +1,3 @@
-/**
- * Created by xuhua on 2016/10/18.
- */
-
 export default class VPatch {
 
   /**

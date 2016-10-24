@@ -1,8 +1,4 @@
-/**
- * Created by xuhua on 2016/10/17.
- */
-
-import _ from 'lodash'
+import each from 'lodash/each'
 import applyProps from './apply-props'
 
 export default function createElement(vnode) {
@@ -17,7 +13,7 @@ export default function createElement(vnode) {
 
   props && applyProps(node, props)
 
-  _.each(vnode.children, child => {
+  each(vnode.children, child => {
     let childNode = createElement(child)
 
     if(childNode) {

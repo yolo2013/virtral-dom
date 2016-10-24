@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import each from 'lodash/each'
 
 // 在初始化每个 VNode 时，可以传入 key 作为节点标志，
 // 在实际的操作中，VNode 顺序和排列可能有比较大的变动。
@@ -46,7 +46,7 @@ export default function reorder(oldChildren, newChildren) {
   let freeCount = newFree.length
 
   // 首先遍历旧节点
-  _.each(oldChildren, (oldChild, index) => {
+  each(oldChildren, (oldChild, index) => {
     let itemIndex
 
     if (oldChild.key) {
@@ -91,7 +91,7 @@ export default function reorder(oldChildren, newChildren) {
   // 遍历新节点
   // 很多情况下，这个循环体的判断条件都不满足
   // 以 [a, b, c] => [d, b, a] 作为示例
-  _.each(newChildren, (newChild, index) => {
+  each(newChildren, (newChild, index) => {
     if (newChild.key) {
       // 如果有key
 
@@ -222,7 +222,7 @@ function keyIndex(children) {
   const keys = {}
   const free = []
 
-  _.each(children, (child, index) => {
+  each(children, (child, index) => {
     child.key
       ? (keys[child.key] = index)
       : free.push(index)

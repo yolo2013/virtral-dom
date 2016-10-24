@@ -30,7 +30,6 @@ test('diff', async t => {
     textContent: '一个短篇'
   }, [], 'node2')
 
-
   const oldNode = vnodeMaker('旧文', '#000', [node1, node2])
 
   const newNode = vnodeMaker('新文', 'red', [node2])
